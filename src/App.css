@@ -1,0 +1,110 @@
+.app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 1rem;
+  gap: 1.5rem;
+}
+
+.app h1 {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #1a1a2e;
+  margin: 0;
+}
+
+.search-bar {
+  display: flex;
+  gap: 0.5rem;
+  width: 100%;
+  max-width: 420px;
+}
+
+.search-bar input {
+  flex: 1;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 1rem;
+  outline: none;
+}
+
+.search-bar input:focus {
+  border-color: #24292e;
+}
+
+.search-bar button {
+  padding: 0.6rem 1.25rem;
+  background: #24292e;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.search-bar button:hover:not(:disabled) {
+  background: #1a1a2e;
+}
+
+.search-bar button:disabled,
+.search-bar input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.status {
+  font-size: 0.95rem;
+  color: #6b7280;
+}
+
+.status.error {
+  color: #dc2626;
+}
+
+.profile-card {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+  max-width: 520px;
+  width: 100%;
+  padding: 1.5rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.profile-avatar {
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.profile-info {
+  text-align: left;
+}
+
+.profile-info h2 {
+  margin: 0 0 0.25rem;
+  font-size: 1.25rem;
+  color: #1a1a2e;
+}
+
+.profile-login {
+  margin: 0 0 0.75rem;
+  color: #6b7280;
+  font-size: 0.95rem;
+}
+
+.profile-bio {
+  margin: 0 0 0.75rem;
+  color: #374151;
+  line-height: 1.5;
+}
+
+.profile-stats {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.9rem;
+  color: #4b5563;
+}
