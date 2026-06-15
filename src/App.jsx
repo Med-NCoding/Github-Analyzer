@@ -6,7 +6,7 @@ import LanguageChart from './components/LanguageChart.jsx'
 import AIInsights from './components/AIInsights.jsx'
 import './App.css'
 import { fetchGitHubUser, fetchGitHubRepos, countLanguages } from './lib/github.js'
-import { fetchAIInsight } from './lib/gemini.js'
+import { fetchAIInsight } from './lib/groq.js'
 
 function App() {
   const [username, setUsername] = useState('')
@@ -17,6 +17,7 @@ function App() {
   const [error, setError] = useState(null)
   const [aiInsight, setAiInsight] = useState('')
   const [aiLoading, setAiLoading] = useState(false)
+  const [aiError, setAiError] = useState('')
 
   async function handleSearch() {
     if (!username.trim()) return
@@ -27,6 +28,7 @@ function App() {
     setRepos([])
     setLanguageData({})
     setAiInsight('')
+    setAiError('')
 
     try {
       const userResult = await fetchGitHubUser(username.trim())
@@ -44,6 +46,7 @@ function App() {
         setAiInsight(insight)
       } catch (aiErr) {
         console.error('AI insight failed:', aiErr)
+        setAiError(aiErr.message || 'Could not generate AI insight')
       } finally {
         setAiLoading(false)
       }
@@ -68,7 +71,7 @@ function App() {
       {userData && <ProfileCard user={userData} />}
       {repos.length > 0 && <RepoList repos={repos} />}
       {Object.keys(languageData).length > 0 && <LanguageChart data={languageData} />}
-      <AIInsights aiInsight={aiInsight} aiLoading={aiLoading} />
+      <AIInsights aiInsight={aiInsight} aiLoading={aiLoading} aiError={aiError} />
     </div>
   )
 }

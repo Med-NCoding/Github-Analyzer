@@ -1,12 +1,12 @@
-const GEMINI_URL =
-  'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent'
+const GROQ_URL = 'https://api.groq.com/openai/v1/chat/completions'
+const GROQ_MODEL = 'llama-3.3-70b-versatile'
 
 export async function fetchAIInsight(languageData, repos) {
   try {
-    const apiKey = import.meta.env.VITE_GEMINI_API_KEY
+    const apiKey = import.meta.env.VITE_GROQ_API_KEY
 
     if (!apiKey) {
-      throw new Error('Missing VITE_GEMINI_API_KEY')
+      throw new Error('Missing VITE_GROQ_API_KEY')
     }
 
     const topLanguages = Object.entries(languageData)
@@ -23,30 +23,30 @@ export async function fetchAIInsight(languageData, repos) {
 
     const prompt = `A developer's GitHub profile shows they primarily use these languages: ${topLanguages}. Their top repositories by stars are: ${topRepos}. In exactly 3 sentences, summarize this developer's coding strengths and the kind of projects they appear to build based on this data. Then in one final sentence, give one specific technology or skill they should learn next to grow as a developer.`
 
-    const response = await fetch(`${GEMINI_URL}?key=${apiKey}`, {
+    const response = await fetch(GROQ_URL, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${apiKey}`
       },
       body: JSON.stringify({
-        contents: [
-          {
-            parts: [{ text: prompt }]
-          }
-        ]
+        model: GROQ_MODEL,
+        messages: [{ role: 'user', content: prompt }],
+        max_tokens: 250,
+        temperature: 0.7
       })
     })
 
     if (!response.ok) {
-      throw new Error('Gemini request failed')
+      throw new Error('Groq request failed')
     }
 
     const data = await response.json()
 
-    const text = data?.candidates?.[0]?.content?.parts?.[0]?.text
+    const text = data?.choices?.[0]?.message?.content
 
     if (!text) {
-      throw new Error('Gemini returned no insight')
+      throw new Error('Groq returned no insight')
     }
 
     return text.trim()
