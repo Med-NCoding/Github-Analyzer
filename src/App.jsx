@@ -3,8 +3,10 @@ import SearchBar from './components/SearchBar'
 import ProfileCard from './components/ProfileCard.jsx'
 import RepoList from './components/RepoList.jsx'
 import LanguageChart from './components/LanguageChart.jsx'
+import AIInsights from './components/AIInsights.jsx'
 import './App.css'
 import { fetchGitHubUser, fetchGitHubRepos, countLanguages } from './lib/github.js'
+import { fetchAIInsight } from './lib/gemini.js'
 
 function App() {
   const [username, setUsername] = useState('')
@@ -13,6 +15,8 @@ function App() {
   const [languageData, setLanguageData] = useState({})
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
+  const [aiInsight, setAiInsight] = useState('')
+  const [aiLoading, setAiLoading] = useState(false)
 
   async function handleSearch() {
     if (!username.trim()) return
@@ -22,6 +26,7 @@ function App() {
     setUserData(null)
     setRepos([])
     setLanguageData({})
+    setAiInsight('')
 
     try {
       const userResult = await fetchGitHubUser(username.trim())
@@ -29,14 +34,24 @@ function App() {
 
       const reposResult = await fetchGitHubRepos(username.trim())
       setRepos(reposResult)
-      setLanguageData(countLanguages(reposResult))
+
+      const languages = countLanguages(reposResult)
+      setLanguageData(languages)
+
+      setAiLoading(true)
+      try {
+        const insight = await fetchAIInsight(languages, reposResult)
+        setAiInsight(insight)
+      } catch (aiErr) {
+        console.error('AI insight failed:', aiErr)
+      } finally {
+        setAiLoading(false)
+      }
     } catch (err) {
       setError(err.message || 'Something went wrong')
     }
 
     setLoading(false)
-
-    console.log("Searching for:", username.trim())
   }
 
   return (
@@ -53,6 +68,7 @@ function App() {
       {userData && <ProfileCard user={userData} />}
       {repos.length > 0 && <RepoList repos={repos} />}
       {Object.keys(languageData).length > 0 && <LanguageChart data={languageData} />}
+      <AIInsights aiInsight={aiInsight} aiLoading={aiLoading} />
     </div>
   )
 }

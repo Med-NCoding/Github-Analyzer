@@ -1,25 +1,22 @@
-function AIInsights({ insight, aiLoading }) {
-    // Still loading — show spinner text
-    if (aiLoading) {
-      return (
-        <div className="ai-insights">
-          <p className="ai-loading">Generating AI insights...</p>
-        </div>
-      )
-    }
-  
-    // No insight yet — render nothing
-    if (!insight) {
-      return null
-    }
-  
-    // Insight ready — show the card
+function AIInsights({ aiInsight, aiLoading }) {
+  if (aiLoading) {
     return (
       <div className="ai-insights">
-        <h2>AI Insights</h2>
-        <p className="ai-text">{insight}</p>
+        <p className="ai-loading">Generating AI insights...</p>
       </div>
     )
   }
-  
-  export default AIInsights
+
+  if (!aiInsight) {
+    return null
+  }
+
+  return (
+    <div className="ai-insights">
+      <h2>AI Developer Insights</h2>
+      <p className="ai-text">{aiInsight}</p>
+    </div>
+  )
+}
+
+export default AIInsights
