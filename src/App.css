@@ -108,3 +108,50 @@
   font-size: 0.9rem;
   color: #4b5563;
 }
+
+.repo-list, .language-chart {
+  margin-top: 2rem;
+  width: 100%;
+  max-width: 600px;
+}
+
+.repo-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background: white;
+  border-radius: 8px;
+  margin-bottom: 8px;
+}
+
+.repo-name {
+  font-weight: 600;
+}
+
+.ai-insights {
+  margin-top: 2rem;
+  width: 100%;
+  max-width: 600px;
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  border: 1px solid #eee;
+}
+
+.ai-insights h2 {
+  font-size: 20px;
+  margin-bottom: 1rem;
+  color: #222;
+}
+
+.ai-text {
+  font-size: 15px;
+  line-height: 1.7;
+  color: #444;
+}
+
+.ai-loading {
+  font-size: 15px;
+  color: #888;
+  font-style: italic;
+}
