@@ -161,3 +161,137 @@
   line-height: 1.6;
   color: #888;
 }
+
+.role-selector {
+  width: 100%;
+  max-width: 420px;
+  text-align: left;
+}
+
+.role-selector label {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-size: 0.9rem;
+  color: #4b5563;
+}
+
+.role-selector select {
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 1rem;
+  background: #fff;
+}
+
+.stack-badges {
+  width: 100%;
+  max-width: 600px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+.stack-badges h2 {
+  margin: 0 0 1rem;
+  font-size: 1.1rem;
+  color: #1a1a2e;
+}
+
+.stack-badge-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.stack-badge {
+  background: #f3f4f6;
+  color: #374151;
+  border: 1px solid #e5e7eb;
+  border-radius: 999px;
+  padding: 0.35rem 0.75rem;
+  font-size: 0.85rem;
+}
+
+.recruiter-feedback {
+  width: 100%;
+  max-width: 720px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+.recruiter-feedback--error {
+  border-color: #fecaca;
+  background: #fef2f2;
+}
+
+.recruiter-header {
+  margin-bottom: 1rem;
+}
+
+.recruiter-header h2 {
+  margin: 0 0 0.25rem;
+  font-size: 1.25rem;
+  color: #1a1a2e;
+}
+
+.recruiter-role {
+  margin: 0;
+  color: #6b7280;
+  font-size: 0.9rem;
+}
+
+.recruiter-score {
+  margin-top: 0.75rem;
+  font-size: 1rem;
+  color: #111827;
+}
+
+.recruiter-score strong {
+  color: #2563eb;
+  font-size: 1.1rem;
+}
+
+.recruiter-loading {
+  margin: 0;
+  color: #6b7280;
+  font-style: italic;
+}
+
+.recruiter-error {
+  margin: 0;
+  color: #b91c1c;
+  line-height: 1.6;
+}
+
+.feedback-section {
+  margin-top: 1.25rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid #f3f4f6;
+}
+
+.feedback-section h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1rem;
+  color: #111827;
+}
+
+.feedback-section ul {
+  margin: 0;
+  padding-left: 1.25rem;
+  color: #374151;
+  line-height: 1.6;
+}
+
+.feedback-section p {
+  margin: 0;
+  color: #374151;
+  line-height: 1.6;
+}
+
+.feedback-section--warning h3 {
+  color: #b45309;
+}

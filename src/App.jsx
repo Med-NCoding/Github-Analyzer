@@ -3,21 +3,32 @@ import SearchBar from './components/SearchBar'
 import ProfileCard from './components/ProfileCard.jsx'
 import RepoList from './components/RepoList.jsx'
 import LanguageChart from './components/LanguageChart.jsx'
-import AIInsights from './components/AIInsights.jsx'
+import RoleSelector, { TARGET_ROLES } from './components/RoleSelector.jsx'
+import StackBadges from './components/StackBadges.jsx'
+import AIRecruiterFeedback from './components/AIRecruiterFeedback.jsx'
 import './App.css'
-import { fetchGitHubUser, fetchGitHubRepos, countLanguages } from './lib/github.js'
-import { fetchAIInsight } from './lib/groq.js'
+import {
+  fetchGitHubUser,
+  fetchGitHubRepos,
+  countLanguages,
+  enrichReposWithReadmes,
+} from './lib/github.js'
+import { detectStack } from './lib/stackDetection.js'
+import { buildProfileSummary } from './lib/profileSummary.js'
+import { fetchRecruiterFeedback } from './lib/recruiterApi.js'
 
 function App() {
   const [username, setUsername] = useState('')
+  const [targetRole, setTargetRole] = useState(TARGET_ROLES[0])
   const [userData, setUserData] = useState(null)
   const [repos, setRepos] = useState([])
   const [languageData, setLanguageData] = useState({})
+  const [detectedStack, setDetectedStack] = useState([])
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
-  const [aiInsight, setAiInsight] = useState('')
-  const [aiLoading, setAiLoading] = useState(false)
-  const [aiError, setAiError] = useState('')
+  const [recruiterFeedback, setRecruiterFeedback] = useState(null)
+  const [recruiterLoading, setRecruiterLoading] = useState(false)
+  const [recruiterError, setRecruiterError] = useState(null)
 
   async function handleSearch() {
     if (!username.trim()) return
@@ -27,8 +38,9 @@ function App() {
     setUserData(null)
     setRepos([])
     setLanguageData({})
-    setAiInsight('')
-    setAiError('')
+    setDetectedStack([])
+    setRecruiterFeedback(null)
+    setRecruiterError(null)
 
     try {
       const userResult = await fetchGitHubUser(username.trim())
@@ -40,15 +52,29 @@ function App() {
       const languages = countLanguages(reposResult)
       setLanguageData(languages)
 
-      setAiLoading(true)
+      // Fetch READMEs for top repos (safe — failures return null per repo)
+      const enrichedRepos = await enrichReposWithReadmes(reposResult, 15)
+      const stack = detectStack(enrichedRepos)
+      setDetectedStack(stack)
+
+      const profileSummary = buildProfileSummary({
+        user: userResult,
+        repos: reposResult,
+        enrichedRepos,
+        languageCounts: languages,
+        detectedStack: stack,
+        targetRole,
+      })
+
+      // AI recruiter feedback — isolated so GitHub data still displays on failure
       try {
-        const insight = await fetchAIInsight(languages, reposResult)
-        setAiInsight(insight)
+        setRecruiterLoading(true)
+        const feedback = await fetchRecruiterFeedback(profileSummary)
+        setRecruiterFeedback(feedback)
       } catch (aiErr) {
-        console.error('AI insight failed:', aiErr)
-        setAiError(aiErr.message || 'Could not generate AI insight')
+        setRecruiterError(aiErr.message || 'Could not generate recruiter feedback')
       } finally {
-        setAiLoading(false)
+        setRecruiterLoading(false)
       }
     } catch (err) {
       setError(err.message || 'Something went wrong')
@@ -60,18 +86,29 @@ function App() {
   return (
     <div className="app">
       <h1>GitHub Profile Analyzer</h1>
+      <RoleSelector
+        value={targetRole}
+        onChange={setTargetRole}
+        disabled={loading || recruiterLoading}
+      />
       <SearchBar
         value={username}
         onChange={setUsername}
         onSearch={handleSearch}
-        disabled={loading}
+        disabled={loading || recruiterLoading}
       />
-      {loading && <p className="status">Loading...</p>}
+      {loading && <p className="status">Loading GitHub profile...</p>}
       {error && <p className="status error">{error}</p>}
       {userData && <ProfileCard user={userData} />}
       {repos.length > 0 && <RepoList repos={repos} />}
       {Object.keys(languageData).length > 0 && <LanguageChart data={languageData} />}
-      <AIInsights aiInsight={aiInsight} aiLoading={aiLoading} aiError={aiError} />
+      {detectedStack.length > 0 && <StackBadges stack={detectedStack} />}
+      <AIRecruiterFeedback
+        feedback={recruiterFeedback}
+        loading={recruiterLoading}
+        error={recruiterError}
+        targetRole={targetRole}
+      />
     </div>
   )
 }
