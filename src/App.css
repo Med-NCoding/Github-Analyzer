@@ -633,15 +633,15 @@
   font-weight: 600;
   cursor: pointer;
   letter-spacing: 0.02em;
-  transition: background 0.18s, border-color 0.18s, transform 0.15s, box-shadow 0.18s;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .mog-cta-btn:hover {
-  background: rgba(139, 92, 246, 0.22);
+  background: rgba(139, 92, 246, 0.2);
   border-color: rgba(139, 92, 246, 0.7);
   color: #ddd6fe;
   transform: translateY(-1px);
-  box-shadow: 0 0 18px rgba(139, 92, 246, 0.25);
+  box-shadow: 0 0 15px rgba(139, 92, 246, 0.25);
 }
 
 .mog-cta-btn:active {
@@ -654,9 +654,9 @@
 .mog-back-btn {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
-  padding: 6px 14px;
-  background: transparent;
+  gap: 6px;
+  padding: 8px 16px;
+  background: rgba(255, 255, 255, 0.02);
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
   color: var(--text-2);
@@ -664,12 +664,13 @@
   font-size: 0.8rem;
   font-weight: 500;
   cursor: pointer;
-  transition: border-color 0.15s, color 0.15s;
+  transition: all 0.2s;
   align-self: flex-start;
 }
 
 .mog-back-btn:hover {
   border-color: var(--accent);
+  background: rgba(91, 124, 247, 0.05);
   color: var(--text-1);
 }
 
@@ -678,66 +679,59 @@
 ═══════════════════════════════════════════════════════ */
 .mog-hero {
   text-align: center;
-  padding: 28px 0 4px;
-  animation: fadeUp 0.45s ease both;
+  padding: 36px 0 12px;
+  animation: fadeUp 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-/* Badge pill */
 .mog-hero-badge {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 5px 14px;
+  padding: 6px 16px;
   border-radius: var(--radius-pill);
-  border: 1px solid rgba(139, 92, 246, 0.4);
+  border: 1px solid rgba(139, 92, 246, 0.35);
   background: rgba(139, 92, 246, 0.08);
-  backdrop-filter: blur(6px);
+  backdrop-filter: blur(10px);
   color: #c4b5fd;
   font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  margin-bottom: 18px;
+  margin-bottom: 20px;
+  box-shadow: 0 0 15px rgba(139, 92, 246, 0.1);
 }
 
-/* Title — big gradient text */
 .mog-hero-title {
-  font-size: clamp(2rem, 5vw, 2.8rem);
+  font-size: clamp(2.2rem, 6vw, 3.2rem);
   font-weight: 800;
-  line-height: 1.15;
-  letter-spacing: -0.03em;
+  line-height: 1.1;
+  letter-spacing: -0.04em;
   margin: 0 0 16px;
-  background: linear-gradient(135deg, #e0e7ff 15%, #a5b4fc 50%, #8b5cf6 100%);
+  background: linear-gradient(135deg, #fff 20%, #c4b5fd 60%, #8b5cf6 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  filter: drop-shadow(0 0 20px rgba(139, 92, 246, 0.35));
+  filter: drop-shadow(0 0 25px rgba(139, 92, 246, 0.25));
 }
 
-.mog-hero-accent {
-  /* Inherits the gradient fill from parent — no extra styling needed */
-}
-
-/* Main copy — bold + warm white */
 .mog-hero-main {
-  font-size: clamp(1rem, 2.5vw, 1.15rem);
+  font-size: clamp(1.05rem, 2.8vw, 1.25rem);
   font-weight: 600;
   color: var(--text-1);
-  margin: 0 0 8px;
-  line-height: 1.5;
+  margin: 0 0 10px;
+  line-height: 1.4;
 }
 
-/* Subtext — softer */
 .mog-hero-sub {
-  font-size: 0.875rem;
+  font-size: 0.9rem;
   color: var(--text-2);
   line-height: 1.7;
-  max-width: 480px;
+  max-width: 520px;
   margin: 0 auto;
 }
 
 /* ═══════════════════════════════════════════════════════
-   MOG SHOWDOWN — Coming-soon placeholder card
+   MOG SHOWDOWN — Coming-soon placeholder card (Not used but kept for consistency)
 ═══════════════════════════════════════════════════════ */
 .mog-coming-card {
   text-align: center;
@@ -774,52 +768,62 @@
    MOG SHOWDOWN — Input form
 ═══════════════════════════════════════════════════════ */
 .mog-form-card {
-  padding: 28px 28px 24px;
+  padding: 32px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 24px;
   border: 1px solid rgba(139, 92, 246, 0.2);
   background:
-    linear-gradient(135deg, rgba(139, 92, 246, 0.03), rgba(91, 124, 247, 0.03)),
+    radial-gradient(circle at 100% 0%, rgba(139, 92, 246, 0.05), transparent 50%),
+    linear-gradient(135deg, rgba(22, 27, 39, 0.85), rgba(13, 17, 23, 0.95)),
     var(--bg-card);
-  animation: fadeUp 0.45s 0.05s ease both;
+  backdrop-filter: blur(12px);
+  animation: fadeUp 0.5s 0.05s ease both;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
 }
 
-/* Username row: input — VS — input */
 .mog-form-grid {
   display: grid;
   grid-template-columns: 1fr auto 1fr;
-  gap: 16px;
+  gap: 20px;
   align-items: end;
 }
 
 .mog-vs-divider {
-  font-size: 0.7rem;
-  font-weight: 800;
-  letter-spacing: 0.1em;
+  font-size: 0.75rem;
+  font-weight: 900;
   color: var(--purple);
-  background: rgba(139, 92, 246, 0.12);
-  border: 1px solid rgba(139, 92, 246, 0.3);
-  border-radius: var(--radius-sm);
-  padding: 0 10px;
+  background: rgba(139, 92, 246, 0.1);
+  border: 1px solid rgba(139, 92, 246, 0.25);
+  border-radius: 50%;
+  width: 38px;
   height: 38px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  box-shadow: 0 0 12px rgba(139, 92, 246, 0.15);
+  margin-bottom: 0px;
 }
 
-/* Role selector row — full width */
 .mog-role-field {
   max-width: 320px;
 }
 
-/* Status messages */
+.mog-role-field select {
+  cursor: pointer;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238b949e' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 14px;
+  padding-right: 36px !important;
+}
+
 .mog-status-error,
 .mog-status-ready {
   font-size: 0.84rem;
   margin: 0;
-  padding: 10px 14px;
+  padding: 12px 16px;
   border-radius: var(--radius-sm);
   animation: fadeUp 0.2s ease both;
 }
@@ -836,58 +840,43 @@
   border: 1px solid rgba(63, 185, 80, 0.22);
 }
 
-/* Run Showdown button */
 .mog-run-btn {
   align-self: flex-start;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 0 24px;
-  height: 40px;
+  gap: 10px;
+  padding: 0 28px;
+  height: 44px;
   border: none;
   border-radius: var(--radius-pill);
   font-family: inherit;
-  font-size: 0.875rem;
+  font-size: 0.9rem;
   font-weight: 700;
   cursor: pointer;
   color: #fff;
   letter-spacing: 0.02em;
   background: linear-gradient(135deg, #6366f1, #8b5cf6);
-  box-shadow: 0 0 0 1px rgba(99, 102, 241, 0.3), 0 4px 16px rgba(99, 102, 241, 0.2);
-  transition: transform 0.18s ease, box-shadow 0.18s ease;
+  box-shadow: 
+    0 0 0 1px rgba(99, 102, 241, 0.3), 
+    0 4px 16px rgba(99, 102, 241, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
-.mog-run-btn:hover {
+.mog-run-btn:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 0 0 1px rgba(129, 140, 248, 0.5), 0 0 22px 4px rgba(99, 102, 241, 0.35);
+  box-shadow: 
+    0 0 0 1px rgba(129, 140, 248, 0.5), 
+    0 0 25px rgba(99, 102, 241, 0.45);
 }
 
-.mog-run-btn:active {
+.mog-run-btn:active:not(:disabled) {
   transform: translateY(0);
 }
 
-/* Mobile */
-@media (max-width: 560px) {
-  .mog-form-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .mog-vs-divider {
-    width: fit-content;
-    height: auto;
-    padding: 4px 14px;
-    align-self: center;
-    margin: 0 auto;
-  }
-
-  .mog-run-btn {
-    width: 100%;
-    justify-content: center;
-  }
-
-  .mog-role-field {
-    max-width: 100%;
-  }
+.mog-run-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 /* ═══════════════════════════════════════════════════════
@@ -896,104 +885,117 @@
 .mog-results-grid {
   display: grid;
   grid-template-columns: 1fr auto 1fr;
-  gap: 12px;
+  gap: 16px;
   align-items: start;
-  animation: fadeUp 0.4s ease both;
 }
 
 .mog-results-vs {
-  font-size: 0.65rem;
+  font-size: 0.75rem;
   font-weight: 800;
-  letter-spacing: 0.12em;
   color: var(--purple);
-  background: rgba(139, 92, 246, 0.12);
-  border: 1px solid rgba(139, 92, 246, 0.3);
-  border-radius: var(--radius-sm);
-  padding: 8px 10px;
-  writing-mode: vertical-rl;
-  text-orientation: mixed;
+  background: rgba(139, 92, 246, 0.1);
+  border: 1px solid rgba(139, 92, 246, 0.25);
+  border-radius: 50%;
+  width: 34px;
+  height: 34px;
   display: flex;
   align-items: center;
   justify-content: center;
-  align-self: stretch;
-  min-height: 80px;
+  align-self: start;
+  margin-top: 40px;
+  box-shadow: 0 0 12px rgba(139, 92, 246, 0.15);
+  flex-shrink: 0;
 }
 
 /* ═══════════════════════════════════════════════════════
-   MOG SHOWDOWN — Profile card
+   MOG SHOWDOWN — Player Columns
 ═══════════════════════════════════════════════════════ */
-.mog-profile-card {
-  padding: 20px;
+.mog-player-col {
   display: flex;
   flex-direction: column;
   gap: 12px;
+  min-width: 0;
+}
+
+/* ── Profiles ── */
+.mog-profile-card {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
   border: 1px solid rgba(139, 92, 246, 0.18);
   background:
     linear-gradient(135deg, rgba(139, 92, 246, 0.04), rgba(91, 124, 247, 0.03)),
     var(--bg-card);
+  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+  box-shadow: var(--shadow);
 }
 
 .mog-profile-top {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
 }
 
 .mog-profile-avatar {
-  width: 52px;
-  height: 52px;
+  width: 56px;
+  height: 56px;
   border-radius: 50%;
-  border: 2px solid rgba(139, 92, 246, 0.35);
+  border: 2px solid rgba(139, 92, 246, 0.3);
   flex-shrink: 0;
   object-fit: cover;
-}
-
-.mog-profile-names {
-  min-width: 0;
+  transition: all 0.3s;
 }
 
 .mog-profile-name {
   margin: 0 0 2px;
-  font-size: 0.95rem;
+  font-size: 1rem;
   font-weight: 700;
   color: var(--text-1);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .mog-profile-login {
   margin: 0;
-  font-size: 0.78rem;
+  font-size: 0.8rem;
   color: var(--text-2);
+  font-weight: 500;
 }
 
 .mog-profile-bio {
-  font-size: 0.8rem;
+  font-size: 0.82rem;
   color: var(--text-2);
   line-height: 1.55;
   margin: 0;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+}
+
+.mog-profile-location {
+  margin: 0;
+  font-size: 0.8rem;
+  color: var(--text-2);
+  opacity: 0.85;
 }
 
 .mog-profile-stats {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 6px;
+  gap: 8px;
 }
 
 .mog-stat {
-  background: var(--bg);
+  background: rgba(255, 255, 255, 0.01);
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
-  padding: 8px 10px;
+  padding: 10px 8px;
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 4px;
   text-align: center;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.mog-stat:hover {
+  border-color: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.03);
 }
 
 .mog-stat-value {
@@ -1008,26 +1010,775 @@
   color: var(--text-2);
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  font-weight: 500;
+  font-weight: 600;
 }
 
-.mog-profile-location {
-  margin: 0;
-  font-size: 0.78rem;
+/* ── Leading User Highlight ── */
+.mog-leader-badge {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  background: linear-gradient(135deg, #a78bfa, #6366f1);
+  color: #fff;
+  font-size: 0.65rem;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  letter-spacing: 0.05em;
+  box-shadow: 0 0 12px rgba(167, 139, 250, 0.4);
+  text-transform: uppercase;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  animation: pulse 2s infinite ease-in-out;
+}
+
+.mog-player-col--winner .mog-profile-card {
+  border-color: rgba(167, 139, 250, 0.5);
+  box-shadow: 
+    0 0 25px rgba(167, 139, 250, 0.15),
+    inset 0 0 12px rgba(167, 139, 250, 0.05);
+  background: 
+    linear-gradient(135deg, rgba(167, 139, 250, 0.08) 0%, rgba(91, 124, 247, 0.04) 100%),
+    var(--bg-card);
+}
+
+.mog-player-col--winner .mog-profile-avatar {
+  border-color: var(--purple);
+  box-shadow: 0 0 12px rgba(167, 139, 250, 0.6);
+}
+
+.mog-player-col--winner .card:not(.mog-profile-card) {
+  border-color: rgba(167, 139, 250, 0.3);
+  box-shadow: 0 4px 20px rgba(167, 139, 250, 0.05);
+}
+
+/* ═══════════════════════════════════════════════════════
+   MOG SHOWDOWN — Repo metrics card
+═══════════════════════════════════════════════════════ */
+.mog-metrics-card {
+  padding: 20px;
+  border: 1px solid rgba(91, 124, 247, 0.18);
+  background:
+    linear-gradient(135deg, rgba(91, 124, 247, 0.04), rgba(139, 92, 246, 0.03)),
+    var(--bg-card);
+  transition: all 0.3s ease;
+}
+
+.mog-metrics-card:hover {
+  border-color: rgba(91, 124, 247, 0.35);
+  box-shadow: var(--shadow);
+}
+
+.mog-metrics-title {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0 0 14px;
+}
+
+.mog-metrics-card .mog-profile-stats {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+/* ═══════════════════════════════════════════════════════
+   MOG SHOWDOWN — Top repos card
+═══════════════════════════════════════════════════════ */
+.mog-top-repos-card {
+  padding: 20px;
+  border: 1px solid rgba(91, 124, 247, 0.15);
+  background: var(--bg-card);
+  transition: all 0.3s ease;
+}
+
+.mog-top-repos-card:hover {
+  border-color: rgba(91, 124, 247, 0.3);
+}
+
+.mog-top-repos-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.mog-repo-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 12px 14px;
+  background: rgba(255, 255, 255, 0.01);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mog-repo-item:hover {
+  border-color: rgba(91, 124, 247, 0.4);
+  background: rgba(91, 124, 247, 0.04);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.mog-repo-name {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-1);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: color 0.2s;
+}
+
+.mog-repo-item:hover .mog-repo-name {
+  color: var(--accent);
+}
+
+.mog-repo-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.mog-repo-stars {
+  font-size: 0.72rem;
+  color: var(--yellow);
+  font-weight: 600;
+  background: rgba(210, 153, 34, 0.08);
+  padding: 2px 6px;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(210, 153, 34, 0.2);
+}
+
+.mog-repo-desc {
+  font-size: 0.74rem;
   color: var(--text-2);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.4;
+  opacity: 0.85;
 }
 
-/* Mobile — stack cards vertically */
+/* ═══════════════════════════════════════════════════════
+   MOG SHOWDOWN — Score Card
+═══════════════════════════════════════════════════════ */
+.mog-score-card {
+  padding: 32px 32px 36px;
+  border: 1px solid rgba(139, 92, 246, 0.25);
+  background:
+    radial-gradient(circle at 50% 0%, rgba(139, 92, 246, 0.08), transparent 60%),
+    linear-gradient(160deg, rgba(22, 27, 39, 0.85) 0%, rgba(13, 17, 23, 0.95) 100%),
+    var(--bg-card);
+  backdrop-filter: blur(12px);
+  animation: fadeUp 0.4s ease both;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+}
+
+.mog-score-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 36px;
+  margin-bottom: 36px;
+}
+
+.mog-score-ring {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.02), rgba(0,0,0,0.3)), var(--bg);
+  gap: 2px;
+  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+  position: relative;
+  box-shadow: inset 0 0 16px rgba(255,255,255,0.02), var(--shadow);
+}
+
+.mog-score-ring::after {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(91, 124, 247, 0.2), rgba(139, 92, 246, 0.2));
+  z-index: -1;
+  opacity: 0.5;
+  transition: opacity 0.3s;
+}
+
+.mog-score-ring--winner {
+  border-color: transparent;
+  box-shadow:
+    0 0 35px rgba(139, 92, 246, 0.35),
+    inset 0 0 20px rgba(139, 92, 246, 0.15);
+}
+
+.mog-score-ring--winner::after {
+  background: linear-gradient(135deg, #5b7cf7, #a78bfa);
+  opacity: 1;
+}
+
+.mog-score-number {
+  font-size: 2.6rem;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--text-1);
+  letter-spacing: -0.04em;
+}
+
+.mog-score-ring--winner .mog-score-number {
+  background: linear-gradient(135deg, #fff 30%, #c4b5fd 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 2px 8px rgba(139, 92, 246, 0.4));
+}
+
+.mog-score-100 {
+  font-size: 0.65rem;
+  color: var(--text-3);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+.mog-score-login {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text-2);
+  max-width: 110px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-top: 4px;
+}
+
+.mog-score-ring--winner .mog-score-login {
+  color: var(--purple);
+  font-weight: 700;
+}
+
+.mog-score-divider {
+  font-size: 0.75rem;
+  font-weight: 900;
+  color: var(--text-3);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow);
+}
+
+/* ═══════════════════════════════════════════════════════
+   MOG SHOWDOWN — Categories
+═══════════════════════════════════════════════════════ */
+.mog-categories {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 0 8px;
+}
+
+.mog-cat-header {
+  display: grid;
+  grid-template-columns: 1fr 140px 1fr;
+  font-size: 0.72rem;
+  color: var(--text-2);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+  padding: 0 4px;
+}
+
+.mog-cat-header span:first-child { text-align: left; }
+.mog-cat-header span:last-child  { text-align: right; }
+.mog-cat-header span:nth-child(2) { text-align: center; color: var(--text-3); }
+
+.mog-cat-row {
+  display: grid;
+  grid-template-columns: 1fr 140px 1fr;
+  align-items: center;
+  gap: 12px;
+}
+
+.mog-cat-label {
+  font-size: 0.72rem;
+  color: var(--text-1);
+  text-align: center;
+  font-weight: 600;
+  white-space: nowrap;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  opacity: 0.9;
+}
+
+.mog-cat-bar-wrap {
+  height: 8px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+  position: relative;
+}
+
+.mog-cat-bar-wrap:first-child {
+  direction: rtl;
+}
+
+.mog-cat-bar {
+  height: 100%;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.08);
+  transition: width 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.mog-cat-bar--left.mog-cat-bar--win {
+  background: linear-gradient(to left, #8b5cf6, #5b7cf7);
+  box-shadow: 0 0 10px rgba(139, 92, 246, 0.4);
+}
+
+.mog-cat-bar--right.mog-cat-bar--win {
+  background: linear-gradient(to right, #8b5cf6, #5b7cf7);
+  box-shadow: 0 0 10px rgba(139, 92, 246, 0.4);
+}
+
+/* ── Verdict banner ── */
+.mog-verdict {
+  margin-top: 32px;
+  padding: 16px 24px;
+  border-radius: var(--radius);
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  animation: fadeUp 0.3s 0.1s ease both;
+  transition: all 0.3s ease;
+}
+
+.mog-verdict--win {
+  border: 1px solid rgba(139, 92, 246, 0.4);
+  background:
+    linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(91, 124, 247, 0.1)),
+    var(--bg-card);
+  color: #fff;
+  box-shadow: 
+    0 0 25px rgba(139, 92, 246, 0.15),
+    0 4px 20px rgba(139, 92, 246, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.mog-verdict--tie {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01)),
+    var(--bg-card);
+  color: var(--text-2);
+  box-shadow: 
+    0 4px 20px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.02);
+}
+
+/* ═══════════════════════════════════════════════════════
+   MOG SHOWDOWN — Responsive Layout
+═══════════════════════════════════════════════════════ */
 @media (max-width: 640px) {
+  .mog-form-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .mog-vs-divider {
+    align-self: center;
+    margin: 8px auto 0;
+  }
+
+  .mog-run-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .mog-role-field {
+    max-width: 100%;
+  }
+
   .mog-results-grid {
     grid-template-columns: 1fr;
+    gap: 16px;
   }
 
   .mog-results-vs {
+    align-self: center;
+    margin: 8px 0;
     writing-mode: horizontal-tb;
     width: fit-content;
     min-height: unset;
-    margin: 0 auto;
     padding: 4px 16px;
   }
+
+  .mog-score-row {
+    gap: 16px;
+  }
+
+  .mog-score-ring {
+    width: 110px;
+    height: 110px;
+  }
+
+  .mog-score-number {
+    font-size: 2rem;
+  }
+
+  .mog-cat-row,
+  .mog-cat-header {
+    grid-template-columns: 1fr 100px 1fr;
+    gap: 8px;
+  }
+
+  .mog-cat-label {
+    font-size: 0.65rem;
+  }
+
+  .mog-score-card {
+    padding: 24px 16px 28px;
+  }
 }
+
+/* ═══════════════════════════════════════════════════════
+   MOG SHOWDOWN — AI Verdict Card & Loader
+═══════════════════════════════════════════════════════ */
+.mog-ai-loading {
+  padding: 36px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  text-align: center;
+  border: 1px dashed rgba(139, 92, 246, 0.4);
+  background: rgba(139, 92, 246, 0.02);
+  animation: fadeUp 0.3s ease both;
+}
+
+.mog-pulse-loader {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--purple);
+  box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.7);
+  animation: pulseLoader 1.5s infinite cubic-bezier(0.66, 0, 0, 1);
+}
+
+@keyframes pulseLoader {
+  to {
+    box-shadow: 0 0 0 16px rgba(139, 92, 246, 0);
+  }
+}
+
+.mog-ai-loading-text {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-2);
+  margin: 0;
+  letter-spacing: 0.02em;
+}
+
+.mog-ai-card {
+  padding: 32px;
+  border: 1px solid rgba(167, 139, 250, 0.3);
+  background:
+    radial-gradient(circle at 100% 0%, rgba(139, 92, 246, 0.05), transparent 50%),
+    radial-gradient(circle at 0% 100%, rgba(91, 124, 247, 0.04), transparent 45%),
+    linear-gradient(135deg, rgba(22, 27, 39, 0.9), rgba(13, 17, 23, 0.95)),
+    var(--bg-card);
+  backdrop-filter: blur(12px);
+  animation: fadeUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+  box-shadow: 0 0 35px rgba(139, 92, 246, 0.15), 0 12px 40px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.mog-ai-card:hover {
+  border-color: rgba(167, 139, 250, 0.45);
+  box-shadow: 0 0 45px rgba(139, 92, 246, 0.22), 0 16px 48px rgba(0, 0, 0, 0.55);
+}
+
+.mog-ai-header {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  padding-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.mog-ai-badge-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.mog-ai-badge {
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--purple);
+  background: rgba(139, 92, 246, 0.12);
+  border: 1px solid rgba(139, 92, 246, 0.25);
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+}
+
+.mog-ai-role-badge {
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--accent);
+  background: rgba(91, 124, 247, 0.08);
+  border: 1px solid rgba(91, 124, 247, 0.25);
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.mog-ai-winner-line {
+  font-size: clamp(1.4rem, 4.5vw, 2.2rem);
+  font-weight: 900;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  margin: 6px 0 12px;
+  background: linear-gradient(135deg, #fff 30%, #c4b5fd 70%, #8b5cf6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 2px 10px rgba(139, 92, 246, 0.2));
+  text-transform: uppercase;
+}
+
+.mog-ai-score-badges {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.mog-ai-score-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 6px 14px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  min-width: 120px;
+  transition: all 0.2s;
+}
+
+.mog-ai-score-pill--leader {
+  border-color: rgba(139, 92, 246, 0.4);
+  background: rgba(139, 92, 246, 0.05);
+  box-shadow: 0 0 10px rgba(139, 92, 246, 0.1);
+}
+
+.mog-score-pill-login {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text-2);
+  max-width: 90px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mog-ai-score-pill--leader .mog-score-pill-login {
+  color: var(--purple);
+}
+
+.mog-score-pill-val {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--text-1);
+  margin-left: auto;
+}
+
+.mog-ai-score-pill--leader .mog-score-pill-val {
+  color: #fff;
+  text-shadow: 0 0 8px rgba(139, 92, 246, 0.4);
+}
+
+.mog-ai-score-vs {
+  font-size: 0.65rem;
+  font-weight: 800;
+  color: var(--text-3);
+  letter-spacing: 0.08em;
+}
+
+.mog-ai-body {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.mog-ai-section {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.mog-ai-sec-title {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--purple);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin: 0;
+}
+
+.mog-ai-text {
+  font-size: 0.88rem;
+  color: var(--text-2);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.mog-ai-split-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.mog-ai-split-box {
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.015);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: var(--radius-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transition: border-color 0.2s;
+}
+
+.mog-ai-split-box:hover {
+  border-color: rgba(91, 124, 247, 0.15);
+}
+
+.mog-ai-split-box--weakness {
+  border-color: rgba(248, 81, 73, 0.12);
+  background: rgba(248, 81, 73, 0.01);
+}
+
+.mog-ai-split-box--weakness:hover {
+  border-color: rgba(248, 81, 73, 0.2);
+}
+
+.mog-ai-split-title {
+  font-size: 0.76rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin: 0;
+  color: var(--accent);
+}
+
+.mog-ai-split-box--weakness .mog-ai-split-title {
+  color: var(--red);
+}
+
+.mog-ai-share-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  padding-top: 20px;
+  margin-top: 8px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.mog-ai-tweet-preview {
+  flex: 1;
+  min-width: 240px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.mog-ai-share-label {
+  font-size: 0.84rem;
+  font-weight: 700;
+  color: var(--text-1);
+}
+
+.mog-tweet-preview-text {
+  font-size: 0.8rem;
+  font-style: italic;
+  color: var(--text-2);
+  background: rgba(0, 0, 0, 0.15);
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  margin: 0;
+  line-height: 1.45;
+  word-break: break-word;
+}
+
+.mog-share-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 24px;
+  background: #1d9bf0;
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-pill);
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.18s, transform 0.15s, box-shadow 0.18s;
+  box-shadow: 0 4px 12px rgba(29, 155, 240, 0.2);
+}
+
+.mog-share-btn:hover {
+  background: #1a8cd8;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(29, 155, 240, 0.35);
+}
+
+.mog-share-btn:active {
+  transform: translateY(0);
+}
+
+.mog-ai-error {
+  font-size: 0.8rem;
+  color: var(--red);
+  margin: 10px 0;
+  text-align: center;
+}
+
+@media (max-width: 640px) {
+  .mog-ai-split-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .mog-ai-card {
+    padding: 20px;
+  }
+}
+
+

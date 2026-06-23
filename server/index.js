@@ -1,6 +1,6 @@
 import express from 'express'
 import cors from 'cors'
-import { generateRecruiterFeedback } from './groqService.js'
+import { generateRecruiterFeedback, generateMogVerdict } from './groqService.js'
 import { getGroqApiKey } from './env.js'
 
 const app = express()
@@ -36,6 +36,27 @@ app.post('/api/recruiter-feedback', async (req, res) => {
     console.error('Recruiter feedback error:', err.message)
     res.status(500).json({
       error: err.message || 'Failed to generate recruiter feedback',
+    })
+  }
+})
+
+app.post('/api/mog-verdict', async (req, res) => {
+  const apiKey = getGroqApiKey()
+
+  if (!apiKey) {
+    return res.status(500).json({
+      error:
+        'API key missing. Add VITE_GROQ_API_KEY to your .env file.',
+    })
+  }
+
+  try {
+    const verdict = await generateMogVerdict(apiKey, req.body)
+    res.json({ verdict })
+  } catch (err) {
+    console.error('Mog verdict error:', err.message)
+    res.status(500).json({
+      error: err.message || 'Failed to generate Mog verdict',
     })
   }
 })

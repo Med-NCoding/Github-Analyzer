@@ -22,3 +22,27 @@ export async function fetchRecruiterFeedback(profileSummary) {
 
   return payload.feedback
 }
+
+export async function fetchMogVerdict(showdownData) {
+  let response
+
+  try {
+    response = await fetch('/api/mog-verdict', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(showdownData),
+    })
+  } catch {
+    throw new Error(
+      'Could not reach the API server. Run npm run dev (not just vite) so the backend starts on port 3001.'
+    )
+  }
+
+  const payload = await response.json().catch(() => ({}))
+
+  if (!response.ok) {
+    throw new Error(payload.error || 'AI Showdown analysis failed')
+  }
+
+  return payload.verdict
+}
