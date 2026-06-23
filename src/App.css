@@ -649,12 +649,9 @@
 }
 
 /* ═══════════════════════════════════════════════════════
-   MOG SHOWDOWN — Back button (in mog hero)
+   MOG SHOWDOWN — Back button
 ═══════════════════════════════════════════════════════ */
 .mog-back-btn {
-  position: absolute;
-  left: 0;
-  top: 0;
   display: inline-flex;
   align-items: center;
   gap: 5px;
@@ -668,6 +665,7 @@
   font-weight: 500;
   cursor: pointer;
   transition: border-color 0.15s, color 0.15s;
+  align-self: flex-start;
 }
 
 .mog-back-btn:hover {
@@ -676,26 +674,219 @@
 }
 
 /* ═══════════════════════════════════════════════════════
-   MOG SHOWDOWN — Placeholder card content
+   MOG SHOWDOWN — Hero section
 ═══════════════════════════════════════════════════════ */
-.mog-placeholder-icon {
-  font-size: 3rem;
-  margin-bottom: 1rem;
-  filter: drop-shadow(0 0 12px rgba(139, 92, 246, 0.5));
+.mog-hero {
+  text-align: center;
+  padding: 28px 0 4px;
+  animation: fadeUp 0.45s ease both;
 }
 
-.mog-placeholder-title {
-  font-size: 1.15rem;
+/* Badge pill */
+.mog-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 14px;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(139, 92, 246, 0.4);
+  background: rgba(139, 92, 246, 0.08);
+  backdrop-filter: blur(6px);
+  color: #c4b5fd;
+  font-size: 0.72rem;
   font-weight: 700;
-  color: var(--text-1);
-  margin: 0 0 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 18px;
 }
 
-.mog-placeholder-sub {
+/* Title — big gradient text */
+.mog-hero-title {
+  font-size: clamp(2rem, 5vw, 2.8rem);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  margin: 0 0 16px;
+  background: linear-gradient(135deg, #e0e7ff 15%, #a5b4fc 50%, #8b5cf6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 20px rgba(139, 92, 246, 0.35));
+}
+
+.mog-hero-accent {
+  /* Inherits the gradient fill from parent — no extra styling needed */
+}
+
+/* Main copy — bold + warm white */
+.mog-hero-main {
+  font-size: clamp(1rem, 2.5vw, 1.15rem);
+  font-weight: 600;
+  color: var(--text-1);
+  margin: 0 0 8px;
+  line-height: 1.5;
+}
+
+/* Subtext — softer */
+.mog-hero-sub {
   font-size: 0.875rem;
   color: var(--text-2);
-  line-height: 1.65;
-  max-width: 420px;
+  line-height: 1.7;
+  max-width: 480px;
   margin: 0 auto;
+}
+
+/* ═══════════════════════════════════════════════════════
+   MOG SHOWDOWN — Coming-soon placeholder card
+═══════════════════════════════════════════════════════ */
+.mog-coming-card {
+  text-align: center;
+  padding: 3rem 2rem;
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  background:
+    linear-gradient(135deg, rgba(139, 92, 246, 0.04), rgba(91, 124, 247, 0.04)),
+    var(--bg-card);
+  animation: fadeUp 0.5s 0.1s ease both;
+}
+
+.mog-coming-icon {
+  font-size: 2.6rem;
+  margin-bottom: 0.8rem;
+  filter: drop-shadow(0 0 10px rgba(139, 92, 246, 0.4));
+}
+
+.mog-coming-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-1);
+  margin: 0 0 8px;
+}
+
+.mog-coming-sub {
+  font-size: 0.84rem;
+  color: var(--text-2);
+  line-height: 1.65;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+/* ═══════════════════════════════════════════════════════
+   MOG SHOWDOWN — Input form
+═══════════════════════════════════════════════════════ */
+.mog-form-card {
+  padding: 28px 28px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  background:
+    linear-gradient(135deg, rgba(139, 92, 246, 0.03), rgba(91, 124, 247, 0.03)),
+    var(--bg-card);
+  animation: fadeUp 0.45s 0.05s ease both;
+}
+
+/* Username row: input — VS — input */
+.mog-form-grid {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 16px;
+  align-items: end;
+}
+
+.mog-vs-divider {
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  color: var(--purple);
+  background: rgba(139, 92, 246, 0.12);
+  border: 1px solid rgba(139, 92, 246, 0.3);
+  border-radius: var(--radius-sm);
+  padding: 0 10px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* Role selector row — full width */
+.mog-role-field {
+  max-width: 320px;
+}
+
+/* Status messages */
+.mog-status-error,
+.mog-status-ready {
+  font-size: 0.84rem;
+  margin: 0;
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  animation: fadeUp 0.2s ease both;
+}
+
+.mog-status-error {
+  color: var(--red);
+  background: rgba(248, 81, 73, 0.06);
+  border: 1px solid rgba(248, 81, 73, 0.22);
+}
+
+.mog-status-ready {
+  color: var(--green);
+  background: rgba(63, 185, 80, 0.06);
+  border: 1px solid rgba(63, 185, 80, 0.22);
+}
+
+/* Run Showdown button */
+.mog-run-btn {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 24px;
+  height: 40px;
+  border: none;
+  border-radius: var(--radius-pill);
+  font-family: inherit;
+  font-size: 0.875rem;
+  font-weight: 700;
+  cursor: pointer;
+  color: #fff;
+  letter-spacing: 0.02em;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  box-shadow: 0 0 0 1px rgba(99, 102, 241, 0.3), 0 4px 16px rgba(99, 102, 241, 0.2);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.mog-run-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 0 1px rgba(129, 140, 248, 0.5), 0 0 22px 4px rgba(99, 102, 241, 0.35);
+}
+
+.mog-run-btn:active {
+  transform: translateY(0);
+}
+
+/* Mobile */
+@media (max-width: 560px) {
+  .mog-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .mog-vs-divider {
+    width: fit-content;
+    height: auto;
+    padding: 4px 14px;
+    align-self: center;
+    margin: 0 auto;
+  }
+
+  .mog-run-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .mog-role-field {
+    max-width: 100%;
+  }
 }
 
