@@ -6,6 +6,7 @@ import RoleSelector, { TARGET_ROLES } from './components/RoleSelector.jsx'
 import StackBadges from './components/StackBadges.jsx'
 import AIRecruiterFeedback from './components/AIRecruiterFeedback.jsx'
 import IntroPage from './components/IntroPage.jsx'
+import CursorGlow from './components/CursorGlow.jsx'
 import './App.css'
 import {
   fetchGitHubUser,
@@ -107,11 +108,17 @@ function App() {
   const isbusy = loading || recruiterLoading
 
   if (showIntro) {
-    return <IntroPage onGetStarted={() => setShowIntro(false)} />
+    return (
+      <>
+        <CursorGlow />
+        <IntroPage onGetStarted={() => setShowIntro(false)} />
+      </>
+    )
   }
 
   return (
     <div className="app">
+      <CursorGlow />
 
       {/* Hero */}
       <div className="hero">
