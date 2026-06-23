@@ -797,7 +797,7 @@ export default function MogShowdown({ onBack }) {
     stackStrength: 'Stack Strength',
     roleFit: 'Role Fit',
     readmeQuality: 'README Quality',
-    activityConsistency: 'Activity & Consistency',
+    activityConsistency: 'Consistency',
     deploymentPolish: 'Deployment & Polish',
     topRepoStrength: 'Top Repo Strength',
     publicSignal: 'Public Signal',
