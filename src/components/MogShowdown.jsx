@@ -441,22 +441,90 @@ export default function MogShowdown({ onBack }) {
                 <div className="mog-ai-split-grid">
                   <div className="mog-ai-split-box">
                     <h5 className="mog-ai-split-title">💪 @{data.p1.login} Strengths</h5>
-                    <p className="mog-ai-text">{aiVerdict.user1Strength}</p>
+                    {aiVerdict.user1?.strengths && aiVerdict.user1.strengths.length > 0 ? (
+                      <ul className="mog-ai-list">
+                        {aiVerdict.user1.strengths.map((str, idx) => <li key={idx} className="mog-ai-list-item">{str}</li>)}
+                      </ul>
+                    ) : <p className="mog-ai-text">No standout strengths visible.</p>}
                   </div>
                   <div className="mog-ai-split-box">
                     <h5 className="mog-ai-split-title">💪 @{data.p2.login} Strengths</h5>
-                    <p className="mog-ai-text">{aiVerdict.user2Strength}</p>
+                    {aiVerdict.user2?.strengths && aiVerdict.user2.strengths.length > 0 ? (
+                      <ul className="mog-ai-list">
+                        {aiVerdict.user2.strengths.map((str, idx) => <li key={idx} className="mog-ai-list-item">{str}</li>)}
+                      </ul>
+                    ) : <p className="mog-ai-text">No standout strengths visible.</p>}
                   </div>
                 </div>
 
                 <div className="mog-ai-split-grid">
                   <div className="mog-ai-split-box mog-ai-split-box--weakness">
-                    <h5 className="mog-ai-split-title">⚠️ @{data.p1.login} Weakness</h5>
-                    <p className="mog-ai-text">{aiVerdict.biggestWeaknesses?.user1 || 'None identified.'}</p>
+                    <h5 className="mog-ai-split-title">⚠️ @{data.p1.login} Weaknesses</h5>
+                    {aiVerdict.user1?.weaknesses && aiVerdict.user1.weaknesses.length > 0 ? (
+                      <div className="mog-ai-weakness-list">
+                        {aiVerdict.user1.weaknesses.map((w, idx) => (
+                          <div key={idx} className="mog-ai-weakness-item">
+                            <p className="mog-weakness-title"><strong>{w.weakness}</strong></p>
+                            <p className="mog-weakness-detail">🔍 <strong>Evidence:</strong> {w.evidence}</p>
+                            <p className="mog-weakness-detail">🎯 <strong>Why it matters:</strong> {w.whyItMatters}</p>
+                            <p className="mog-weakness-fix">🛠️ <strong>Fix:</strong> {w.fix}</p>
+                          </div>
+                        ))}
+                      </div>
+                    ) : <p className="mog-ai-text">No critical weaknesses identified.</p>}
                   </div>
                   <div className="mog-ai-split-box mog-ai-split-box--weakness">
-                    <h5 className="mog-ai-split-title">⚠️ @{data.p2.login} Weakness</h5>
-                    <p className="mog-ai-text">{aiVerdict.biggestWeaknesses?.user2 || 'None identified.'}</p>
+                    <h5 className="mog-ai-split-title">⚠️ @{data.p2.login} Weaknesses</h5>
+                    {aiVerdict.user2?.weaknesses && aiVerdict.user2.weaknesses.length > 0 ? (
+                      <div className="mog-ai-weakness-list">
+                        {aiVerdict.user2.weaknesses.map((w, idx) => (
+                          <div key={idx} className="mog-ai-weakness-item">
+                            <p className="mog-weakness-title"><strong>{w.weakness}</strong></p>
+                            <p className="mog-weakness-detail">🔍 <strong>Evidence:</strong> {w.evidence}</p>
+                            <p className="mog-weakness-detail">🎯 <strong>Why it matters:</strong> {w.whyItMatters}</p>
+                            <p className="mog-weakness-fix">🛠️ <strong>Fix:</strong> {w.fix}</p>
+                          </div>
+                        ))}
+                      </div>
+                    ) : <p className="mog-ai-text">No critical weaknesses identified.</p>}
+                  </div>
+                </div>
+
+                <div className="mog-ai-split-grid">
+                  <div className="mog-ai-split-box">
+                    <h5 className="mog-ai-split-title">🚀 @{data.p1.login} Target Action Plan</h5>
+                    {aiVerdict.user1?.missingSignals && aiVerdict.user1.missingSignals.length > 0 && (
+                      <div className="mog-ai-signals-list">
+                        <strong>Missing Signals:</strong>
+                        <div className="mog-ai-badges-container">
+                          {aiVerdict.user1.missingSignals.map((sig, idx) => <span key={idx} className="mog-ai-signal-badge">{sig}</span>)}
+                        </div>
+                      </div>
+                    )}
+                    <p className="mog-ai-text" style={{ marginTop: '8px' }}>
+                      📚 <strong>Next to learn:</strong> {aiVerdict.user1?.nextStackToLearn || 'No suggestions needed.'}
+                    </p>
+                    <p className="mog-ai-text">
+                      💡 <strong>Next Project:</strong> {aiVerdict.user1?.nextProjectRecommendation || 'No suggestions needed.'}
+                    </p>
+                  </div>
+                  
+                  <div className="mog-ai-split-box">
+                    <h5 className="mog-ai-split-title">🚀 @{data.p2.login} Target Action Plan</h5>
+                    {aiVerdict.user2?.missingSignals && aiVerdict.user2.missingSignals.length > 0 && (
+                      <div className="mog-ai-signals-list">
+                        <strong>Missing Signals:</strong>
+                        <div className="mog-ai-badges-container">
+                          {aiVerdict.user2.missingSignals.map((sig, idx) => <span key={idx} className="mog-ai-signal-badge">{sig}</span>)}
+                        </div>
+                      </div>
+                    )}
+                    <p className="mog-ai-text" style={{ marginTop: '8px' }}>
+                      📚 <strong>Next to learn:</strong> {aiVerdict.user2?.nextStackToLearn || 'No suggestions needed.'}
+                    </p>
+                    <p className="mog-ai-text">
+                      💡 <strong>Next Project:</strong> {aiVerdict.user2?.nextProjectRecommendation || 'No suggestions needed.'}
+                    </p>
                   </div>
                 </div>
 
