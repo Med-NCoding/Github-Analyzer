@@ -1865,3 +1865,69 @@
   text-transform: uppercase;
   letter-spacing: 0.02em;
 }
+
+/* Mog Showdown Evidence Profile Breakdown */
+.mog-evidence-breakdown-section {
+  border-top: 1px solid var(--border);
+  padding-top: 20px;
+  margin-top: 16px;
+}
+
+.mog-evidence-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+.mog-evidence-col {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+}
+
+.mog-evidence-col-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-1);
+  margin: 0 0 12px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+.mog-evidence-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.mog-evidence-item {
+  font-size: 0.8rem;
+  line-height: 1.4;
+  padding: 6px 10px;
+  border-radius: var(--radius-sm);
+}
+
+.mog-evidence-item--pos {
+  color: #34d399;
+  background: rgba(52, 211, 153, 0.05);
+  border-left: 3px solid #34d399;
+}
+
+.mog-evidence-item--neg {
+  color: #f87171;
+  background: rgba(248, 113, 113, 0.05);
+  border-left: 3px solid #f87171;
+}
+
+@media (max-width: 680px) {
+  .mog-evidence-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}
+

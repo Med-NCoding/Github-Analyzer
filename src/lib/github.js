@@ -79,3 +79,32 @@ export async function fetchGitHubUser(username) {
 
     return enriched;
   }
+
+  // Fetch file list in the root of a repo
+  export async function fetchRepoContents(owner, repoName) {
+    try {
+      const response = await fetch(
+        `https://api.github.com/repos/${owner}/${repoName}/contents`
+      );
+      if (!response.ok) {
+        return [];
+      }
+      const data = await response.json();
+      return Array.isArray(data) ? data : [];
+    } catch {
+      return [];
+    }
+  }
+
+  // Fetch raw file contents from a download URL (like raw.githubusercontent.com)
+  export async function fetchRepoFileByUrl(downloadUrl) {
+    try {
+      const response = await fetch(downloadUrl);
+      if (!response.ok) {
+        return null;
+      }
+      return await response.text();
+    } catch {
+      return null;
+    }
+  }

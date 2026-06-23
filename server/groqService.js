@@ -166,32 +166,53 @@ You MUST respond with valid JSON only (no markdown fences, no extra text) matchi
 }`
 
 
+const makeUserEvidenceString = (user, metrics, score) => {
+  const formatLangs = (metrics.detectedLanguages || []).map(l => `${l.language} (${l.percentage}%)`).join(', ') || 'None'
+  const formatFrameworks = (metrics.detectedFrameworks || []).join(', ') || 'None'
+  const formatDepth = (metrics.projectDepth?.details || []).join(', ') || 'No backend/database/DevOps files detected'
+  const formatDocs = (metrics.documentationQuality?.details || []).join(', ') || 'No README details found'
+  const formatDeploy = (metrics.deploymentSignals?.details || []).join(', ') || 'No live deployment links found'
+  const formatActivity = (metrics.activityConsistency?.details || []).join(', ') || 'No recent push events'
+  
+  let formatTopRepo = 'None'
+  if (metrics.topRepoStrength?.name) {
+    const sizeMb = Math.round((metrics.topRepoStrength.sizeKb || 0) / 1024 * 10) / 10
+    const detailsStr = (metrics.topRepoStrength.details || []).join(', ')
+    formatTopRepo = `${metrics.topRepoStrength.name} (Stars: ${metrics.topRepoStrength.stars || 0}, Forks: ${metrics.topRepoStrength.forks || 0}, Size: ${sizeMb}MB, ${detailsStr})`
+  }
+
+  const formatTop3 = (metrics.top3 || []).map(r => `${r.name} (${r.language || 'N/A'}, ★${r.stargazers_count}): ${r.description || 'No description'}`).join('; ')
+
+  return `- Username: ${user.login}
+- Name: ${user.name || user.login}
+- Bio: ${user.bio || 'None'}
+- Followers: ${user.followers}
+- Public Repos: ${user.public_repos}
+- Total Stars: ${metrics.totalStars}
+- Total Forks: ${metrics.totalForks}
+- Top Language: ${metrics.topLang}
+- Calculated Score: ${score.total}/100
+- Detected Languages: ${formatLangs}
+- Detected Frameworks/Tools: ${formatFrameworks}
+- Project Depth Signals: ${formatDepth}
+- Documentation Quality: ${formatDocs}
+- Deployment Signals: ${formatDeploy}
+- Recent Activity: ${formatActivity}
+- Strongest Repository: ${formatTopRepo}
+- Top 3 Repos: ${formatTop3}`
+}
+
 export async function generateMogVerdict(apiKey, showdownData) {
+  const user1Evidence = makeUserEvidenceString(showdownData.p1, showdownData.m1, showdownData.s1)
+  const user2Evidence = makeUserEvidenceString(showdownData.p2, showdownData.m2, showdownData.s2)
+
   const userPrompt = `Target Role: ${showdownData.role}
 
 User 1:
-- Username: ${showdownData.p1.login}
-- Name: ${showdownData.p1.name || showdownData.p1.login}
-- Bio: ${showdownData.p1.bio || 'None'}
-- Followers: ${showdownData.p1.followers}
-- Public Repos: ${showdownData.p1.public_repos}
-- Total Stars: ${showdownData.m1.totalStars}
-- Total Forks: ${showdownData.m1.totalForks}
-- Top Language: ${showdownData.m1.topLang}
-- Calculated Score: ${showdownData.s1.total}/100
-- Top Repos: ${showdownData.m1.top3.map(r => `${r.name} (${r.language || 'N/A'}, ★${r.stargazers_count}): ${r.description || 'No description'}`).join('; ')}
+${user1Evidence}
 
 User 2:
-- Username: ${showdownData.p2.login}
-- Name: ${showdownData.p2.name || showdownData.p2.login}
-- Bio: ${showdownData.p2.bio || 'None'}
-- Followers: ${showdownData.p2.followers}
-- Public Repos: ${showdownData.p2.public_repos}
-- Total Stars: ${showdownData.m2.totalStars}
-- Total Forks: ${showdownData.m2.totalForks}
-- Top Language: ${showdownData.m2.topLang}
-- Calculated Score: ${showdownData.s2.total}/100
-- Top Repos: ${showdownData.m2.top3.map(r => `${r.name} (${r.language || 'N/A'}, ★${r.stargazers_count}): ${r.description || 'No description'}`).join('; ')}
+${user2Evidence}
 
 Compare their GitHub evidence and output the JSON verdict.`
 
