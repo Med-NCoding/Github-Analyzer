@@ -15,6 +15,7 @@ export default function IntroPage({ onGetStarted }) {
       {/* Glow orbs */}
       <div className="intro-glow intro-glow-1" />
       <div className="intro-glow intro-glow-2" />
+      <div className="intro-glow intro-glow-3" />
 
       <div className="intro-content">
         <div className="intro-badge">AI-Powered · GitHub · Insights</div>
