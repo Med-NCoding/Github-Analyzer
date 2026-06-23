@@ -614,3 +614,88 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* ═══════════════════════════════════════════════════════
+   MOG SHOWDOWN — CTA button (in hero)
+═══════════════════════════════════════════════════════ */
+.mog-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 14px;
+  padding: 8px 20px;
+  border: 1px solid rgba(139, 92, 246, 0.45);
+  border-radius: var(--radius-pill);
+  background: rgba(139, 92, 246, 0.1);
+  color: #c4b5fd;
+  font-family: inherit;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  letter-spacing: 0.02em;
+  transition: background 0.18s, border-color 0.18s, transform 0.15s, box-shadow 0.18s;
+}
+
+.mog-cta-btn:hover {
+  background: rgba(139, 92, 246, 0.22);
+  border-color: rgba(139, 92, 246, 0.7);
+  color: #ddd6fe;
+  transform: translateY(-1px);
+  box-shadow: 0 0 18px rgba(139, 92, 246, 0.25);
+}
+
+.mog-cta-btn:active {
+  transform: translateY(0);
+}
+
+/* ═══════════════════════════════════════════════════════
+   MOG SHOWDOWN — Back button (in mog hero)
+═══════════════════════════════════════════════════════ */
+.mog-back-btn {
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 14px;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-2);
+  font-family: inherit;
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+}
+
+.mog-back-btn:hover {
+  border-color: var(--accent);
+  color: var(--text-1);
+}
+
+/* ═══════════════════════════════════════════════════════
+   MOG SHOWDOWN — Placeholder card content
+═══════════════════════════════════════════════════════ */
+.mog-placeholder-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  filter: drop-shadow(0 0 12px rgba(139, 92, 246, 0.5));
+}
+
+.mog-placeholder-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-1);
+  margin: 0 0 10px;
+}
+
+.mog-placeholder-sub {
+  font-size: 0.875rem;
+  color: var(--text-2);
+  line-height: 1.65;
+  max-width: 420px;
+  margin: 0 auto;
+}
+

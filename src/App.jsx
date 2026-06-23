@@ -7,6 +7,7 @@ import StackBadges from './components/StackBadges.jsx'
 import AIRecruiterFeedback from './components/AIRecruiterFeedback.jsx'
 import IntroPage from './components/IntroPage.jsx'
 import CursorGlow from './components/CursorGlow.jsx'
+import MogShowdown from './components/MogShowdown.jsx'
 import './App.css'
 import {
   fetchGitHubUser,
@@ -20,6 +21,7 @@ import { fetchRecruiterFeedback } from './lib/recruiterApi.js'
 
 function App() {
   const [showIntro, setShowIntro] = useState(true)
+  const [showMog, setShowMog] = useState(false)
   const [username, setUsername] = useState('')
   const [targetRole, setTargetRole] = useState(TARGET_ROLES[0])
   const [userData, setUserData] = useState(null)
@@ -115,6 +117,14 @@ function App() {
       </>
     )
   }
+  if (showMog) {
+    return (
+      <>
+        <CursorGlow />
+        <MogShowdown onBack={() => setShowMog(false)} />
+      </>
+    )
+  }
 
   return (
     <div className="app">
@@ -126,6 +136,12 @@ function App() {
           <span className="hero-accent">GitHub</span> Profile Analyzer
         </h1>
         <p>AI-powered recruiter feedback for developer portfolios</p>
+        <button
+          className="mog-cta-btn"
+          onClick={() => setShowMog(true)}
+        >
+          ⚔️ MOG Showdown
+        </button>
       </div>
 
       {/* Search panel */}
