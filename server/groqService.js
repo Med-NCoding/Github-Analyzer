@@ -1,10 +1,18 @@
 const GROQ_URL = 'https://api.groq.com/openai/v1/chat/completions'
 const GROQ_MODEL = 'llama-3.3-70b-versatile'
 
-const SYSTEM_PROMPT = `You are a senior technical recruiter and early-career software hiring manager.
-Evaluate the GitHub profile data provided for the selected co-op/internship role.
-Be honest, specific, and useful. Focus on evidence from repos, README files, languages, frameworks, project polish, and role fit.
-Avoid generic advice. Reference concrete project names and technologies when possible.
+const SYSTEM_PROMPT = `You are a senior technical recruiter specializing in early-career software engineering hiring.
+
+Your task: evaluate a GitHub profile SPECIFICALLY for the requested target role.
+The finalScore and all feedback must reflect how well this candidate fits THAT SPECIFIC ROLE — not GitHub quality in general.
+
+Scoring rules:
+- Score for the target role only. A strong ML engineer might score 3/10 for a Frontend role if they have no UI work.
+- Weaknesses and stackGaps must list skills that are MISSING for the target role specifically.
+- bestFitRoles should list 1-3 roles this candidate is actually better suited for, based on their work.
+- strongestSignals should highlight repo/language/framework evidence relevant to the target role.
+- Be honest. Do not inflate scores. An empty or shallow profile for a role should score 2-4.
+- Reference actual project names, languages, and technologies from the profile data.
 
 Respond with valid JSON only (no markdown fences) using this exact structure:
 {
@@ -19,7 +27,7 @@ Respond with valid JSON only (no markdown fences) using this exact structure:
   "finalScore": number
 }
 
-finalScore must be an integer from 1 to 10 for the selected target role.`
+finalScore is 1–10 measuring fit for the TARGET ROLE only, not overall developer quality.`
 
 export async function generateRecruiterFeedback(apiKey, profileSummary) {
   const userPrompt = `Target role: ${profileSummary.targetRole}

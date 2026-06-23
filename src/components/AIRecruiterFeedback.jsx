@@ -1,10 +1,8 @@
-function FeedbackSection({ title, items, variant = 'list' }) {
-  if (!items || (Array.isArray(items) && items.length === 0)) {
-    return null
-  }
+function Block({ title, items, className, fullWidth }) {
+  if (!items || (Array.isArray(items) && items.length === 0)) return null
 
   return (
-    <section className={`feedback-section feedback-section--${variant}`}>
+    <div className={`feedback-block ${className ?? ''} ${fullWidth ? 'feedback-block--full' : ''}`}>
       <h3>{title}</h3>
       {Array.isArray(items) ? (
         <ul>
@@ -15,51 +13,65 @@ function FeedbackSection({ title, items, variant = 'list' }) {
       ) : (
         <p>{items}</p>
       )}
-    </section>
+    </div>
   )
 }
 
 function AIRecruiterFeedback({ feedback, loading, error, targetRole }) {
   if (loading) {
     return (
-      <div className="recruiter-feedback">
-        <p className="recruiter-loading">Recruiter analysis in progress…</p>
-      </div>
+      <>
+        <div className="ai-header">
+          <p className="ai-title">AI Recruiter Feedback</p>
+        </div>
+        <p className="ai-loading">Recruiter analysis in progress…</p>
+      </>
     )
   }
 
   if (error) {
     return (
-      <div className="recruiter-feedback recruiter-feedback--error">
-        <h2>AI Recruiter Feedback</h2>
-        <p className="recruiter-error">{error}</p>
-      </div>
+      <>
+        <div className="ai-header">
+          <p className="ai-title">AI Recruiter Feedback</p>
+        </div>
+        <p className="ai-error">{error}</p>
+      </>
     )
   }
 
-  if (!feedback) {
-    return null
-  }
+  if (!feedback) return null
 
   return (
-    <div className="recruiter-feedback">
-      <div className="recruiter-header">
-        <h2>AI Recruiter Feedback</h2>
-        <p className="recruiter-role">Evaluated for: {targetRole}</p>
-        <div className="recruiter-score">
-          Final score: <strong>{feedback.finalScore}/10</strong>
-        </div>
+    <>
+      {/* Header row */}
+      <div className="ai-header">
+        <p className="ai-title">AI Recruiter Feedback</p>
+        <span className="ai-role-tag">{targetRole}</span>
+        {feedback.finalScore != null && (
+          <span className="ai-score-tag">
+            Score <strong>{feedback.finalScore}/10</strong>
+          </span>
+        )}
       </div>
 
-      <FeedbackSection title="Overall Recruiter Impression" items={feedback.overallImpression} variant="text" />
-      <FeedbackSection title="Strongest Signals" items={feedback.strongestSignals} />
-      <FeedbackSection title="Weaknesses / Missing Signals" items={feedback.weaknesses} />
-      <FeedbackSection title="Possible Red Flags" items={feedback.redFlags} variant="warning" />
-      <FeedbackSection title="Best-Fit Roles" items={feedback.bestFitRoles} />
-      <FeedbackSection title="Recommended Projects to Add" items={feedback.recommendedProjects} />
-      <FeedbackSection title="Stack Gaps to Fix" items={feedback.stackGaps} />
-      <FeedbackSection title="Resume Bullet Suggestions" items={feedback.resumeBullets} />
-    </div>
+      {/* Feedback cards grid */}
+      <div className="feedback-grid">
+        <Block
+          title="Overall Impression"
+          items={feedback.overallImpression}
+          className="fb--impression"
+          fullWidth
+        />
+        <Block title="Strongest Signals"        items={feedback.strongestSignals}   className="fb--signals"  />
+        <Block title="Weaknesses / Missing"      items={feedback.weaknesses}         className="fb--weakness" />
+        <Block title="Possible Red Flags"        items={feedback.redFlags}           className="fb--flags"    />
+        <Block title="Best-Fit Roles"            items={feedback.bestFitRoles}       className="fb--roles"    />
+        <Block title="Recommended Projects"      items={feedback.recommendedProjects} className="fb--recs"   />
+        <Block title="Stack Gaps to Fix"         items={feedback.stackGaps}          className="fb--gaps"    />
+        <Block title="Resume Bullet Suggestions" items={feedback.resumeBullets}      className="fb--resume"  />
+      </div>
+    </>
   )
 }
 
