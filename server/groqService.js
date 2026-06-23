@@ -1,6 +1,35 @@
 const GROQ_URL = 'https://api.groq.com/openai/v1/chat/completions'
 const GROQ_MODEL = 'llama-3.3-70b-versatile'
 
+function parseRobustJson(text) {
+  if (!text) return null
+  let cleanText = text.trim()
+  
+  // Remove markdown code block formatting if present
+  if (cleanText.startsWith('```')) {
+    cleanText = cleanText.replace(/^```(?:json)?\n?/, '').replace(/\n?```$/, '').trim()
+  }
+  
+  try {
+    return JSON.parse(cleanText)
+  } catch (firstErr) {
+    // Try to find the first '{' and last '}'
+    const startIdx = cleanText.indexOf('{')
+    const endIdx = cleanText.lastIndexOf('}')
+    if (startIdx !== -1 && endIdx !== -1 && endIdx > startIdx) {
+      const jsonCandidate = cleanText.slice(startIdx, endIdx + 1)
+      try {
+        return JSON.parse(jsonCandidate)
+      } catch (secondErr) {
+        console.error("Failed to parse extracted JSON substring:", secondErr.message)
+      }
+    }
+    console.error("Failed to parse Groq response JSON. Raw content was:")
+    console.error(text)
+    throw firstErr
+  }
+}
+
 const SYSTEM_PROMPT = `You are a senior technical recruiter specializing in early-career software engineering hiring.
 
 Your task: evaluate a GitHub profile SPECIFICALLY for the requested target role.
@@ -72,9 +101,11 @@ Evaluate this candidate for the target role and return the JSON response.`
   }
 
   try {
-    return JSON.parse(content)
-  } catch {
-    throw new Error('Groq returned invalid JSON. Please try again.')
+    return parseRobustJson(content)
+  } catch (err) {
+    console.error('Groq Recruiter Feedback JSON Parse Failure:', err.message)
+    console.error('Groq Recruiter Feedback Raw Response Content:', content)
+    throw new Error(`Failed to parse Groq response: ${err.message}`)
   }
 }
 
@@ -199,8 +230,10 @@ Compare their GitHub evidence and output the JSON verdict.`
   }
 
   try {
-    return JSON.parse(content)
-  } catch {
-    throw new Error('Groq returned invalid JSON. Please try again.')
+    return parseRobustJson(content)
+  } catch (err) {
+    console.error('Groq Mog Verdict JSON Parse Failure:', err.message)
+    console.error('Groq Mog Verdict Raw Response Content:', content)
+    throw new Error(`Failed to parse Groq response: ${err.message}`)
   }
 }
